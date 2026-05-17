@@ -39,29 +39,56 @@ const Dashboard = () => {
     ? tasks
     : tasks.filter(t => t.status === filter);
 
+  const todoCount = tasks.filter(t => t.status === 'todo').length;
+  const inProgressCount = tasks.filter(t => t.status === 'inprogress').length;
+  const doneCount = tasks.filter(t => t.status === 'done').length;
+
   return (
     <>
       <Navbar />
       <div className="container mt-4">
-        <h2 className="mb-4">📋 My Tasks</h2>
+
+        {/* Stats Row */}
+        <div className="row mb-4">
+          <div className="col-md-4 mb-3">
+            <div className="card text-center p-3">
+              <h3 className="fw-bold text-secondary">{todoCount}</h3>
+              <p className="text-muted mb-0">To Do</p>
+            </div>
+          </div>
+          <div className="col-md-4 mb-3">
+            <div className="card text-center p-3">
+              <h3 className="fw-bold text-primary">{inProgressCount}</h3>
+              <p className="text-muted mb-0">In Progress</p>
+            </div>
+          </div>
+          <div className="col-md-4 mb-3">
+            <div className="card text-center p-3">
+              <h3 className="fw-bold text-success">{doneCount}</h3>
+              <p className="text-muted mb-0">Completed</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Task Form */}
         <TaskForm onTaskAdded={handleTaskAdded} />
 
         {/* Filter Buttons */}
-        <div className="mb-4">
+        <div className="mb-4 d-flex gap-2">
           <button
-            className={`btn me-2 ${filter === 'all' ? 'btn-primary' : 'btn-outline-primary'}`}
+            className={`btn ${filter === 'all' ? 'btn-primary' : 'btn-outline-primary'}`}
             onClick={() => setFilter('all')}
           >
-            All
+            All ({tasks.length})
           </button>
           <button
-            className={`btn me-2 ${filter === 'todo' ? 'btn-secondary' : 'btn-outline-secondary'}`}
+            className={`btn ${filter === 'todo' ? 'btn-secondary' : 'btn-outline-secondary'}`}
             onClick={() => setFilter('todo')}
           >
             To Do
           </button>
           <button
-            className={`btn me-2 ${filter === 'inprogress' ? 'btn-primary' : 'btn-outline-primary'}`}
+            className={`btn ${filter === 'inprogress' ? 'btn-primary' : 'btn-outline-primary'}`}
             onClick={() => setFilter('inprogress')}
           >
             In Progress
@@ -76,12 +103,14 @@ const Dashboard = () => {
 
         {/* Tasks List */}
         {loading ? (
-          <div className="text-center">
+          <div className="text-center py-5">
             <div className="spinner-border text-primary" role="status" />
+            <p className="mt-3 text-muted">Loading tasks...</p>
           </div>
         ) : filteredTasks.length === 0 ? (
-          <div className="alert alert-info">
-            No tasks found. Add a new task above! 🚀
+          <div className="text-center py-5">
+            <h5 className="text-muted">No tasks found</h5>
+            <p className="text-muted">Add a new task above to get started</p>
           </div>
         ) : (
           filteredTasks.map(task => (

@@ -12,17 +12,19 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary py-3">
       <div className="container">
-        <Link className="navbar-brand fw-bold" to="/dashboard">
-          ✅ TaskFlow
+        <Link className="navbar-brand fw-bold fs-4" to="/dashboard">
+          TaskFlow
         </Link>
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center gap-3">
           {user && (
             <>
-              <span className="text-white me-3">👤 {user.name}</span>
+              <span className="text-white opacity-75">
+                {user.name}
+              </span>
               <button
-                className="btn btn-outline-light btn-sm"
+                className="btn btn-outline-light btn-sm px-3"
                 onClick={handleLogout}
               >
                 Logout

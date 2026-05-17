@@ -25,42 +25,48 @@ const Login = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-5">
-          <div className="card shadow p-4">
-            <h2 className="text-center mb-4">Welcome Back 👋</h2>
-            {error && <div className="alert alert-danger">{error}</div>}
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label className="form-label">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  className="form-control"
-                  placeholder="Enter your email"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  className="form-control"
-                  placeholder="Enter your password"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <button type="submit" className="btn btn-primary w-100">
-                Login
-              </button>
-            </form>
-            <p className="text-center mt-3">
-              Don't have an account? <Link to="/register">Register</Link>
-            </p>
+    <div className="auth-wrapper">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-5">
+            <div className="auth-card">
+              <h2 className="auth-title">Welcome Back</h2>
+              <p className="auth-subtitle">Login to manage your tasks</p>
+              {error && <div className="alert alert-danger">{error}</div>}
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label className="form-label fw-500">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    className="form-control"
+                    placeholder="Enter your email"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="form-label">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    className="form-control"
+                    placeholder="Enter your password"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary w-100 py-2">
+                  Login
+                </button>
+              </form>
+              <p className="text-center mt-4 text-muted">
+                Don't have an account?{' '}
+                <Link to="/register" className="text-primary fw-bold">
+                  Register
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
